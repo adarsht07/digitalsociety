@@ -1,0 +1,152 @@
+﻿{% extends 'Chairman/index.html' %}   
+{% block content %}       
+ <section class="content home">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>Add Member <small class="text-muted">Welcome to Digital Society</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        
+                            <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10" type="button">
+                                <i class="zmdi zmdi-plus"></i>
+                            </button>
+                        
+                        
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="{% url 'c-dashboard' %}"><i class="zmdi zmdi-home"></i> Digital Society</a></li>
+                            <li class="breadcrumb-item">Member</li>
+                            <li class="breadcrumb-item active">Add Member</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">                
+                
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <h2><strong>Basic</strong> Information <small>Description text here...</small> </h2>
+                    <ul class="header-dropdown">
+                        <li class="remove">
+                            <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <form action="{% url 'add-member' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="body">
+                    <div class="row clearfix">
+                        <div class="col-sm-4">
+                            <input placeholder="-- House No --" name = "house_no" class="form-control" list="house">
+                            <datalist id="house">
+                                {% for h in context.house_all %}
+                                 <option value="{{h}}">
+                                {% endfor %}
+
+                            </datalist>
+                        </div>
+                        <div class="col-sm-4">
+                            <input placeholder="-- Select Gender --" name="gender" class="form-control" list="gender">
+                            <datalist id="gender">
+                                <option value="Male">
+                                <option value="Female">
+                                <option value="Others">
+                            </datalist>
+                        </div>
+                        <div class="col-sm-4">
+                            <input placeholder="-- Select Marrital Status --" name="marrital_status" class="form-control" list="m_status">
+                            <datalist id="m_status">
+                                <option value="Married">
+                                <option value="Single">
+                            </datalist>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row clearfix">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First Name" name="firstname">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name" name="lastname">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nationality" name="nationality">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Locality" name="locality">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="date" class="form-control" placeholder="Date of Birth" name="birthdate">
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Job Speciality" name="job_specification">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Phone" name="mobileno">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="No of family Member" name="no_of_members">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input type="text" name="email" class="form-control" placeholder="Enter Your Email">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="No of Vehicles" name="no_of_vehicles">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Vehicles Details(e.g- bike,car--)" name="vehicle_type">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input type="file" class="form-control" name="id_proof" >
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <textarea rows="4" class="form-control no-resize" placeholder="Enter job address" name="job_address"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-primary btn-round">Submit</button>
+                            <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+            </div>
+        </section>
+        {% endblock %}

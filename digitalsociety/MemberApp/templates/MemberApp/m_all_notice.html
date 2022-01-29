@@ -1,0 +1,81 @@
+﻿{% extends 'Memberapp/m_index.html' %}   
+{% block content %}  
+
+ <section class="content home">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>Notice List <small class="text-muted">Welcome to Digital Society</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        
+                        
+                        
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="{% url 'c-dashboard'%}"><i class="zmdi zmdi-home"></i>Digital Society</a></li>
+                            <li class="breadcrumb-item">Notice</li>
+                            <li class="breadcrumb-item active">Notice List</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">                
+                <div class="blog-page">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 left-box">
+            {% for n in context.nall %}
+            <div class="card single_post">
+                <div class="body">
+                    <h3 class="m-t-0 m-b-5"><a href="detail.html">{{n.title}}</a></h3>
+                    <ul class="meta">
+                        <li><a href="#"><i class="zmdi zmdi-account col-blue"></i>Posted By: Chairman</a></li>
+                        <li><a href="#"><i class="zmdi zmdi-clock col-green"></i>{{n.whenpublished}}</a></li>
+                        <li><a href="#"><i class="zmdi zmdi-eye col-blue"></i>{{n.NoticeviewCount}}</a></li>
+                        <li class="like" data-sid="{{n.id}}"><a id="mydata{{n.id}}"><i class="zmdi zmdi-thumb-up col-blue"></i>{{n.LikeNoticeCount}}</a></li>
+                        <li class="dislike" data-sid="{{n.id}}"><a id="mdata{{n.id}}"><i class="zmdi zmdi-thumb-down col-blue"></i>{{n.DislikeNoticeCount}}</a></li>
+                    </ul>
+                    {% if n.pic or n.videofile %}
+                    <ul class="meta">
+                        <li><a href="#"><i class="zmdi zmdi-account col-blue"></i>Media Added</a></li>
+                        {% if n.pic%}
+                            <li><a href="#"><i class="zmdi zmdi-collection-image col-green"></i></a></li>
+                        {% endif %}
+                        {%if n.videofile %}
+                            <li><a href="#"><i class="zmdi zmdi-collection-video col-blue"></i></a></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %} 
+                </div>                    
+                <!--<div class="body">
+                    {% if n.pic %}
+                    <div class="img-post m-b-15">
+                        <img src="{{n.pic.url}}">
+                        
+                    </div>
+                    {% endif %}
+
+                    {% if n.videpfile %}
+                    <div class="img-post m-b-15">
+                        <video width="320" height="240" controls>
+
+                            <source src="{{n.videpfile.url}}" type="video/mp4">
+  
+                        </video>
+                        
+                    </div>
+                    {% endif %}
+                    <p>{{n.description}}</p>
+                    <a href="detail.html" title="Edit" class="btn btn-round btn-info">Edit</a>
+                    <a href="{% url 'del-notice' pk=n.id %}" title="Delete" class="btn btn-round btn-info">Delete</a>                        
+                </div>-->
+                <a href="{% url 'm-all-notice-details' pk=n.id %}" title="Read More" class="btn btn-round btn-info">Read More</a>
+            </div>                   
+            {% endfor %}            
+                            
+        </div>
+       
+    </div>
+</div>
+            </div>
+        </section>
+{% endblock %}

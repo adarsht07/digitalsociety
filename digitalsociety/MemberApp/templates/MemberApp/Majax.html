@@ -1,0 +1,133 @@
+
+<script>
+
+$(".like").on("click",function(){
+    console.log('hiiii')
+    let id = $(this).attr('data-sid');
+    let mydata = "#mydata"+$(this).attr('data-sid');
+    let mdata = "#mdata"+$(this).attr('data-sid');
+
+    console.log('=',mydata)
+    console.log('=',mdata)
+
+    console.log(id)  
+
+    data = {
+        id :id,
+        mydata:mydata,
+        mdata:mdata,
+    }
+
+    $.ajax(
+        {
+            url : "{% url 'like-notice' %}",
+            method: "POST",
+            data : data,
+
+            success: function(response)
+            {
+                mydata= response.context.mydata
+                mdata = response.context.mdata
+                console.log('suc',mydata)
+                x = response.context.c_like
+                y = response.context.c_dislike
+                $(mydata).html("<i class='zmdi zmdi-thumb-up col-blue'></i>"+ x )
+                $(mdata).html("<i class='zmdi zmdi-thumb-down col-blue'></i>"+ y )
+
+            
+            }
+        }
+    )
+
+})
+
+$(".dislike").on("click",function(){
+    console.log('hiiii')
+    let id = $(this).attr('data-sid');
+    let mydata = "#mydata"+$(this).attr('data-sid');
+    let mdata = "#mdata"+$(this).attr('data-sid');
+
+    console.log(id)  
+
+    data = {
+        id :id,
+        mydata:mydata,
+        mdata:mdata,
+    }
+
+    $.ajax(
+        {
+            url : "{% url 'dislike-notice' %}",
+            method: "POST",
+            data : data,
+
+            success: function(response)
+            {
+                mydata= response.context.mydata
+                mdata = response.context.mdata
+                console.log('suc',mydata)
+                x = response.context.c_like
+                y = response.context.c_dislike
+                $(mydata).html("<i class='zmdi zmdi-thumb-up col-blue'></i>"+ x )
+                $(mdata).html("<i class='zmdi zmdi-thumb-down col-blue'></i>"+ y )
+            }
+        }
+    )
+
+})
+
+$("#e_like").on("click",function(){
+    console.log('hiiii')
+    let id = $(this).attr('data-sid');
+    console.log(id)  
+
+    data = {
+        id :id,
+    }
+
+    $.ajax(
+        {
+            url : "{% url 'like-event' %}",
+            method: "POST",
+            data : data,
+
+            success: function(response)
+            {
+                console.log('****')
+                x = response.context.c_like
+                y = response.context.c_dislike
+                $("#e_like").html("<a id='count'><i class='zmdi zmdi-thumb-up col-blue'></i>"+ x +"</a>")
+                $("#e_dislike").html("<a id='count'><i class='zmdi zmdi-thumb-down col-blue'></i>"+ y +"</a>")
+            
+            }
+        }
+    )
+
+})
+
+$("#e_dislike").on("click", function(){
+    let id = $(this).attr('data-sid');
+
+    data = {
+        id : id,
+    }
+
+    $.ajax(
+        {
+            url : "{% url 'dislike-event' %}",
+            method: "POST",
+            data : data,
+
+            success: function(response)
+            {
+                x = response.context.c_like
+                y = response.context.c_dislike
+                $("#e_like").html("<a id='count'><i class='zmdi zmdi-thumb-up col-blue'></i>"+ x +"</a>")
+                $("#e_dislike").html("<a id='count'><i class='zmdi zmdi-thumb-down col-blue'></i>"+ y +"</a>")
+            
+            }
+        }
+    )
+})
+
+</script>

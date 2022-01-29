@@ -1,0 +1,79 @@
+﻿{% extends 'Memberapp/m_index.html' %}   
+{% block content %}  
+
+ <section class="content home">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>Notice List <small class="text-muted">Welcome to Digital Society</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        
+                        
+                        
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="{% url 'c-dashboard'%}"><i class="zmdi zmdi-home"></i>Digital Society</a></li>
+                            <li class="breadcrumb-item">Notice</li>
+                            <li class="breadcrumb-item active">Notice List</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">                
+                <div class="blog-page">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 left-box">
+            <div class="card single_post">
+                <div class="body">
+                    <h3 class="m-t-0 m-b-5"><a href="detail.html">{{context.nid.title}}</a></h3>
+                    <ul class="meta">
+                        <li><a href="#"><i class="zmdi zmdi-account col-blue"></i>Posted By: Chairman</a></li>
+                        <li><a href="#"><i class="zmdi zmdi-clock col-green"></i>{{context.nid.whenpublished}}</a></li>
+                        <li><a href="#"><i class="zmdi zmdi-eye col-blue"></i>{{context.nid.NoticeviewCount}}</a></li>
+                    </ul>
+                    {% if context.nid.pic or context.nid.videofile %}
+                    <ul class="meta">
+                        <li><a href="#"><i class="zmdi zmdi-account col-blue"></i>Media Added</a></li>
+                        {% if context.nid.pic%}
+                            <li><a href="#"><i class="zmdi zmdi-collection-image col-green"></i></a></li>
+                        {% endif %}
+                        {%if context.nid.videofile %}
+                            <li><a href="#"><i class="zmdi zmdi-collection-video col-blue"></i></a></li>
+                        {% endif %}
+                    </ul>
+                    {% endif %} 
+                </div>                    
+                <div class="body">
+                    {% if context.nid.pic %}
+                    <div class="img-post m-b-15">
+                        <img src="{{context.nid.pic.url}}">
+                        
+                    </div>
+                    {% endif %}
+
+                    {% if context.nid.videpfile %}
+                    <div class="img-post m-b-15">
+                        <video width="320" height="240" controls>
+
+                            <source src="{{context.nid.videpfile.url}}" type="video/mp4">
+  
+                        </video>
+                        
+                    </div>
+                    {% endif %}
+                </div>
+                    <p>{{context.nid.description}}</p>
+                    <a href="{% url 'm-all-notice' %}" title="Delete" class="btn btn-round btn-info">Back</a>
+                                            
+                </div>
+                
+            </div>                   
+                    
+                            
+        </div>
+       
+    </div>
+</div>
+            </div>
+        </section>
+{% endblock %}

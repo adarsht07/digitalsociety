@@ -1,0 +1,60 @@
+﻿   
+{% extends 'MemberApp/m_index.html' %}   
+{% block content %}
+<section class="content home">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>All <small class="text-muted">Welcome to Digital Society</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        
+                            <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10" type="button">
+                                <i class="zmdi zmdi-plus"></i>
+                            </button>
+                        
+                        
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="{% url 'c-dashboard'%}"><i class="zmdi zmdi-home"></i> Digital Society</a></li>
+                            <li class="breadcrumb-item">Members</li>
+                            <li class="breadcrumb-item active">All Members</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">                
+                
+    <div class="row clearfix">
+        {% for m in context.m_all %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card project_widget">
+                <div class="pw_img">
+                    <img class="img-fluid" src="{{m.id_proof.url}}" alt="About the image">
+                </div>
+                <div class="pw_content">
+                    <div class="pw_header">
+                        <h6>{{m.firstname}} {{m.lastname}} - {{m.house_id.house_no}}</h6>
+                        <ul class="list-unstyled team-info margin-0 p-t-15">
+                            <li class="m-r-15"><small>Member</small></li>
+                            <li><img src="..\assets\images\xs\avatar2.jpg" alt="Avatar"></li>
+                            <li><img src="..\assets\images\xs\avatar3.jpg" alt="Avatar"></li>
+                            <li><img src="..\assets\images\xs\avatar4.jpg" alt="Avatar"></li>
+                            <li><img src="..\assets\images\xs\avatar6.jpg" alt="Avatar"></li>
+                            <li><a href="javascript:void(0);" title="Add Member"><i class="zmdi zmdi-plus-circle"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="pw_meta">
+                        <p> Job Specification : {{m.job_specification}} </p>
+                        <p>Contact no : {{m.mobileno}}</p>
+                        <a href="more-departments.html" class="btn btn-primary btn-simple btn-round">More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+
+            </div>
+        </section>
+        {% endblock %}

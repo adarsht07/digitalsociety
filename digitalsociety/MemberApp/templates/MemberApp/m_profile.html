@@ -1,0 +1,124 @@
+﻿   
+{% extends 'MemberApp/m_index.html' %}
+{% load static %}   
+{% block content %}  
+<section class="content home">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>Profile <small class="text-muted">Welcome to Digital Society</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        
+                        
+                            <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10" type="button">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="{% url 'c-dashboard'%}"><i class="zmdi zmdi-home"></i> Digital Society</a></li>
+                            <li class="breadcrumb-item">Member</li>                                      
+                            <li class="breadcrumb-item active">Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">                
+                
+    <div class="row clearfix profile-page">
+        <div class="col-lg-12 col-md-12">
+            <div class="card profile-header">
+                <div class="body text-center" style="background-image:url('{% static 'Chairman/assets/images/lg1.jpg' %}')">>
+                    <div class="profile-image"> <img src="{{context.mid.profile_pic.url}}" alt=""> </div>
+                    <div>
+                        <h4 class="m-b-0"><strong>{{context.mid.firstname}}</strong>{{context.mid.lastname}}</h4>
+                        <span class="job_post">{{context.uid.role}}</span>
+                        <p>795 Folsom Ave, Suite 600<br> San Francisco, CADGE 94107</p>
+                    </div>
+                    
+                    
+                </div>                    
+            </div>                               
+            
+                           
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Account">Account</a></li>                        
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane body active" id="about">
+                        <hr>
+                        <ul class="list-unstyled">
+                            <li>
+                                <p><strong>Namw:</strong> {{context.mid.firstname}} {{context.mid.lastname}}</p>
+                            </li>
+                            <li>
+                                <p><strong>Email:</strong> {{context.uid.email}}</p>
+                            </li>
+                            <li>
+                                <p><strong>Gender:</strong> Male</p>
+                            </li>
+                        <hr>
+                        <h6>Responsibilities</h6>
+                        <hr>
+                        <ul class="list-unstyled">
+                            <li>
+                                <p><strong>1:</strong> Attend all the general body meetings of the society.</p>
+                            </li>
+                            <li>
+                                <p><strong>2:</strong> To pay the maintenance charges and other dues regularly. </p>
+                            </li>
+                            <li>
+                                <p><strong>3:</strong> To respect the members of society as members of a family and co-operate in the working of the society and to the managing committee.</p>
+                            </li>
+                            <li>
+                                <p><strong>4:</strong> Vehicles should be parked in the compound of the society as per the provision in the Rule made by the society and as per its instruction.</p>
+                            </li>
+                            <li>
+                                <p><strong>5:</strong> If member wants to do internal structural changes in his flat, he has to obtain permission and approval from Municipal Corporation and competent authority. </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane body" id="Account">
+                        <form action="{% url 'm-profile' %}" method="POST">
+                            {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="email" value="{{context.uid.email}}" readonly disabled>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Current Password" name="currentpassword">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="New Password" name="newpassword">
+                        </div>
+                        <button class="btn btn-info btn-round">Save Changes</button>
+                    </form>
+                        <hr>
+                        <label><b> Update Profile Picture </b> </label>
+
+                        <form action="{% url 'upload-pic' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="pic">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-primary btn-round" value="Upload Image">
+                            </div>
+                        
+                        </form>
+                    </div>                        
+                </div>
+            </div>
+                         
+        </div>
+    </div>
+
+            </div>
+        </section>
+{% endblock %}
+        

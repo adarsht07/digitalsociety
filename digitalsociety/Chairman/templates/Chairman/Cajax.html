@@ -1,0 +1,82 @@
+
+<script>
+
+$(".btnapprove").on("click", function(){
+    console.log('----')
+    let id = $(this).attr('data-sid')
+    console.log(id)
+    let myid = "#my"+$(this).attr('data-sid')
+    // console.log(myid)
+    data = {
+        id : id,
+        myid : myid,
+    }
+    $.ajax(
+        {
+            url : "{% url 'app' %}",
+            method: "POST",
+            data:data,
+            success: function(response)
+            {
+                console.log('successs')
+                status=response.context.x
+                myid = response.context.myid
+              
+                console.log('suc',status)
+                console.log('id',myid)
+                if (status == "approved")
+                {
+                    $(myid).html("<span class='badge badge-success'>Approve</span>")  
+                }
+                else if(status == "rejected")
+                {
+                    $(myid).html("<span class='badge badge-danger'>Rejected</span>")  
+                }
+                else 
+                {
+                    $(myid).html("<span class='badge badge-warning'>Pending</span>")  
+                }
+            
+            }
+        }
+    )
+})
+
+$(".btnreject").on("click", function(){
+    let id = $(this).attr('data-sid')
+    let myid = "#my"+$(this).attr('data-sid')
+    data = {
+        id :id,
+        myid : myid,
+    }
+    $.ajax(
+        {
+            url : "{% url 'rejct' %}",
+            method: "POST",
+            data: data,
+            success: function(response)
+            {
+                status=response.context.x
+                myid = response.context.myid
+              
+                console.log('suc',status)
+                console.log('id',myid)
+                if (status == "approved")
+                {
+                    $(myid).html("<span class='badge badge-success'>Approve</span>")  
+                }
+                else if(status == "rejected")
+                {
+                    $(myid).html("<span class='badge badge-danger'>Rejected</span>")  
+                }
+                else 
+                {
+                    $(myid).html("<span class='badge badge-warning'>Pending</span>")  
+                }
+            }
+            
+        }
+    )
+})
+
+</script>

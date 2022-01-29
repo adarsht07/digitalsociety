@@ -1,0 +1,48 @@
+
+<script>
+
+$("#email").on("change",function(){
+    let email = $("#email").val()
+
+    data = {
+        email : email,
+    }
+
+    $.ajax({
+        url: "{% url 'check-email' %}",
+        method: "POST",
+        data: data,
+
+        success: function(response)
+        {
+            
+            console.log(response.context.msg)
+            x = response.context.msg
+
+            if(x == "success")
+            {
+                // $("#email").css('color','red');
+                console.log('*****************')
+                $("#email").css('border-color','green');
+                $("#email").css('border-width','2px');
+                $("#my").css('border-color','green');
+                $("#my").css('border-width','2px');
+                $("#submit").attr("disabled",false);
+                $("#sign-up").attr("disabled",true)
+            }
+            else{
+                $("#email").css('border-color','red');
+                $("#email").css('border-width','2px');
+                $("#my").css('border-color','red');
+                $("#my").css('border-width','2px');            
+                $("#sign-up").attr("disabled",false);
+            }   
+        }
+    })
+})
+
+</script>
+
+
+
+// moth rate  jun-2021 due date, status 

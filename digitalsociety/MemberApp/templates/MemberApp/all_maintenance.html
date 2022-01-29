@@ -1,0 +1,221 @@
+﻿{% extends 'MemberApp/m_index.html' %}
+{% block content %}        
+
+<section class="content home">
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
+                        <h2>Maintenance <small class="text-muted">Welcome to Digital Society</small></h2>
+                    </div>            
+                    <div class="col-lg-7 col-md-7 col-sm-12 text-right">
+                        
+                            <button class="btn btn-white btn-icon btn-round d-none d-md-inline-block float-right m-l-10" type="button">
+                                <i class="zmdi zmdi-check"></i>
+                            </button>
+                        
+                        
+                        <ul class="breadcrumb float-md-right">
+                            <li class="breadcrumb-item"><a href="{% url 'c-dashboard'%}"><i class="zmdi zmdi-home"></i> Digital Society</a></li>
+                            <li class="breadcrumb-item">Maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">                
+                
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <div class="card Watchman-list">
+                <div class="header">
+                    <h2><strong>Maintenance</strong> List</h2>
+                    <!-- <ul class="header-dropdown">
+                        <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
+                            <ul class="dropdown-menu dropdown-menu-right slideUp">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else</a></li>
+                            </ul>
+                        </li>
+                        <li class="remove">
+                            <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
+                        </li>
+                    </ul> -->
+                </div>
+                <div class="body">
+                    <!-- Nav tabs -->
+                   
+                        
+                    <!-- Tab panes -->
+                    <div class="tab-content m-t-10">
+                        <div class="tab-pane table-responsive active" id="All">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <!-- <input type="hidden" value="{{context.uid.id}}" name="userid" /> -->
+                                
+                                <table class="table m-b-0 table-hover">
+                                    <thead>
+                                        <tr>                                       
+                                            
+                                            <th>Email</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Start Date</th>
+                                            <th>Due Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th >Pay</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for m in context.pid %}
+                                        {% if m.status == "Pending" or m.status == "Due" %}
+                                        <tr>
+                                            <!-- <td><span class="list-icon"><img class="Watchman-img" src="{{m.profile_pic.url}}" height="60" width="60" alt=""></span></td> -->
+                                            <td>{{m.user_id.email}}</td>
+                                            <td>{{context.mid.firstname}}</td>
+                                            <td>{{context.mid.lastname}}</td>
+                                            <td>{{m.date}}</td>
+                                            <td>{{m.duedate}}</td>
+                                            <td>{{m.total}}</td>       
+
+
+                                            {% if m.status == "Paid"%}
+                                                <td id="status"><span class="badge badge-success">Paid</span></td>
+                                            {% elif m.status == "Due" %}
+                                                <td id="status"><span class="badge badge-danger">Due</span></td>
+                                            {% elif m.status == "Pending" %}
+                                                <td id="status"><span class="badge badge-warning">Pending</span></td>
+                                            {% endif %}
+                                            <!-- {% if w.status == "approved"%}
+                                                <td id="status"><span class="badge badge-success">Approve</span></td>
+                                            {% elif w.status == "rejected" %}
+                                                <td id="status"><span class="badge badge-danger">Rejected</span></td>
+                                            {% else %}
+                                                <td id="status"><span class="badge badge-warning">Pending</span></td>
+                                            {% endif %} -->
+                                                
+                                            <!-- <td>
+                                                <a href="">Approve</a>
+                                            </td>
+                                            <td>        
+                                                <a href="">Rejected</a>
+                                            </td> -->
+
+                                            <td><a href="{% url  'initiate_payment' pk=m.id %}" style="color: green;">Pay Now</a></td>
+                                            
+
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                </table> 
+                            </form>
+                        </div>
+                        <!-- <div class="tab-pane table-responsive" id="USA">
+                            <table class="table m-b-0 table-hover">
+                                <thead>
+                                    <tr>                                       
+                                        <th>Media</th>
+                                        <th>Watchman ID</th>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Address</th>
+                                        <th>Number</th>
+                                        <th>Last Visit</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar1.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00598</span></td>
+                                        <td>Daniel</td>
+                                        <td>32</td>
+                                        <td>71 Pilgrim Avenue Chevy Chase, MD 20815</td>
+                                        <td>404-447-6013</td>
+                                        <td>11 Jan 2018</td>
+                                        <td><span class="badge badge-success">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar2.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00258</span></td>
+                                        <td>Alexander</td>
+                                        <td>22</td>
+                                        <td>123 6th St. Melbourne, FL 32904</td>
+                                        <td>404-447-6013</td>
+                                        <td>15 Jan 2018</td>
+                                        <td><span class="badge badge-success">Approved</span></td>
+                                    </tr>                                       
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar1.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00456</span></td>
+                                        <td>Joseph</td>
+                                        <td>27</td>
+                                        <td>70 Bowman St. South Windsor, CT 06074</td>
+                                        <td>404-447-6013</td>
+                                        <td>19 Jan 2018</td>
+                                        <td><span class="badge badge-success">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar2.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00789</span></td>
+                                        <td>Cameron</td>
+                                        <td>38</td>
+                                        <td>123 6th St. Melbourne, FL 32904</td>
+                                        <td>404-447-6013</td>
+                                        <td>19 Jan 2018</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar3.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00987</span></td>
+                                        <td>Alex</td>
+                                        <td>39</td>
+                                        <td>123 6th St. Melbourne, FL 32904</td>
+                                        <td>404-447-6013</td>
+                                        <td>20 Jan 2018</td>
+                                        <td><span class="badge badge-success">Approved</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar4.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00951</span></td>
+                                        <td>James</td>
+                                        <td>32</td>
+                                        <td>44 Shirley Ave. West Chicago, IL 60185</td>
+                                        <td>404-447-6013</td>
+                                        <td>22 Jan 2018</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar1.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00953</span></td>
+                                        <td>charlie</td>
+                                        <td>51</td>
+                                        <td>123 6th St. Melbourne, FL 32904</td>
+                                        <td>404-447-6013</td>
+                                        <td>22 Jan 2018</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="list-icon"><img class="Watchman-img" src="..\assets\images\xs\avatar2.jpg" alt=""></span></td>
+                                        <td><span class="list-name">KU 00934</span></td>
+                                        <td>thomas</td>
+                                        <td>26</td>
+                                        <td>123 6th St. Melbourne, FL 32904</td>
+                                        <td>404-447-6013</td>
+                                        <td>29 Jan 2018</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            </div>
+        </section>
+{% endblock %}
